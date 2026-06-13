@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from typing import Any
+import numpy as np
 import psycopg
 from pgvector.psycopg import register_vector
 
@@ -66,7 +67,7 @@ class PostgresStore(VectorStore):
                                 doc_id,
                                 c.index,
                                 c.text,
-                                c.embedding,
+                                np.array(c.embedding, dtype=np.float32),
                                 json.dumps(c.metadata),
                             )
                             for c in chunks

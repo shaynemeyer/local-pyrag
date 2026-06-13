@@ -49,3 +49,13 @@ To install all the dependencies in the pyproject.toml file run:
 ```bash
 uv sync
 ```
+
+---
+
+## Database
+
+Once you have the database created, you can create the tables.
+
+```bash
+PGPASSWORD=yourpassword psql -U username -d pyrag -f db/init.sql
+```
