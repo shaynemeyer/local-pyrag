@@ -23,7 +23,7 @@ class PostgresStore(VectorStore):
 
     def has_document(self, source_path: str, content_hash: str) -> bool:
         conn = self._connect()
-        with conn.cursor as cur:
+        with conn.cursor() as cur:
             cur.execute(
                 "select 1 from documents where source_path = %s and content_hash =%s",
                 (source_path, content_hash),
@@ -59,7 +59,7 @@ class PostgresStore(VectorStore):
                         """
                         insert into chunks
                           (document_id, chunk_index, content, embedding, metadata)
-                        values (%s, %s, %s, %s)
+                        values (%s, %s, %s, %s, %s)
                         """,
                         [
                             (
@@ -67,7 +67,7 @@ class PostgresStore(VectorStore):
                                 c.index,
                                 c.text,
                                 c.embedding,
-                                json.dump(c.metadata),
+                                json.dumps(c.metadata),
                             )
                             for c in chunks
                         ],

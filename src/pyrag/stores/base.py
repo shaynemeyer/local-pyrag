@@ -43,7 +43,7 @@ class VectorStore(ABC):
         """Return top-k chunks for the query."""
 
     @abstractmethod
-    def close() -> None:
+    def close(self) -> None:
         """Release any underlying resources."""
 
     def __enter__(self) -> "VectorStore":
