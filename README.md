@@ -1,12 +1,12 @@
 # local-pyrag
 
-A local RAG CLI that chats with documents using a locally-running LLM via [Ollama](https://ollama.com).
+A local RAG CLI for chatting with a locally-running LLM via [Ollama](https://ollama.com).
 
 ## Requirements
 
-- [Ollama](https://ollama.com) running locally
 - Python 3.11+
 - [uv](https://docs.astral.sh/uv/)
+- [Ollama](https://ollama.com) running locally
 
 ## Setup
 
@@ -17,10 +17,10 @@ uv sync
 Create a `.env` file in the project root:
 
 ```env
-# Point at your Ollama instance (default: http://localhost:11434/v1)
+# Ollama API endpoint (default: http://localhost:11434/v1)
 OPENAI_BASE_URL=http://localhost:11434/v1
 
-# Not required for Ollama, but must be non-empty for the OpenAI client
+# Any non-empty value works for Ollama
 OPENAI_API_KEY=unused-local
 
 # Model to use (default: gemma3:latest)
@@ -29,16 +29,23 @@ CHAT_MODEL=gemma3:latest
 
 ## Usage
 
+Start a chat session:
+
 ```bash
-uv run pyrag --help
+pyrag
 ```
+
+In-session commands:
+
+| Command            | Action                     |
+| ------------------ | -------------------------- |
+| `/reset`           | Clear conversation history |
+| `/exit` or `/quit` | Quit                       |
 
 ## Development
 
-```bash
-# Install deps
-uv sync
+To install all the dependencies in the pyproject.toml file run:
 
-# Run directly
-uv run pyrag
+```bash
+uv sync
 ```

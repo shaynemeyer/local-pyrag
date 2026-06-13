@@ -15,7 +15,7 @@ class Message(TypedDict):
 
 
 class ChatClient:
-    def __int__(self, base_url: str | None, api_key: str, model: str) -> None:
+    def __init__(self, base_url: str | None, api_key: str, model: str) -> None:
         self._client = OpenAI(base_url=base_url, api_key=api_key)
         self._model = model
 
@@ -33,6 +33,6 @@ class ChatClient:
         for chunk in stream:
             if not chunk.choices:
                 continue
-            piece = chunk[0].delta.content
+            piece = chunk.choices[0].delta.content
             if piece:
                 yield piece
